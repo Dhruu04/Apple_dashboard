@@ -4,6 +4,8 @@
 
 A comprehensive, executive-grade web application designed for financial modeling, strategic forecasting, and real-time operational scenario planning. Built around Apple's core product portfolio (iPhone, iPad Pro, MacBook Pro, Apple Watch, AirPods Pro) across European territories (Italy and Sweden), this dashboard enables product managers, supply chain leads, and finance executives to analyze how operational and cost adjustments impact bottom-line profitability in real-time.
 
+**Live Application URL:** [https://appledashboard.streamlit.app/](https://appledashboard.streamlit.app/)
+
 ---
 
 ## Executive Overview
@@ -48,18 +50,12 @@ Evaluate all financial outputs through different currency lenses:
 *   **Currency Options:** Toggle all dashboard metrics and statements between EUR, USD, and SEK.
 *   **Dynamic Exchange Sourcing:** Standardized conversion scales apply instantly across every scorecard, graphic, and pro-forma ledger.
 
-### 3. Regional Goal-Seek and What-If Simulator
-Powered by an iterative root-finding numerical engine, this tool provides quantitative answers to complex strategic targets:
-*   **Target Definitions:** Select a desired KPI target (e.g., Total Revenue, Gross Margin Percentage, or EBIT Operating Profit) and set a target value.
-*   **Adjustment Variables:** Define which business lever to pull (Selling Price, Sales Volume, Material Costs, Labor Rate, or OPEX Percentage) and isolate the scope to specific products and countries.
-*   **Iterative Solutions:** The engine runs multi-point interpolation algorithms to output the precise percentage change required in the variable to achieve the goal, automatically reflecting the adjusted values on the charts.
-
-### 4. Automated Variance Impact Reporting
+### 3. Automated Variance Impact Reporting
 A rule-based data synthesis system that acts as an integrated financial analyst:
 *   Computes exact differences in top-line revenue, blended margin percentages, and factory spending compared to the baseline model.
 *   Generates analytical insights to identify strategic patterns, such as "Growth Traps" (growing top-line revenue at the expense of severe margin erosion) and "Operational Efficiency Wins" (reducing cash layout while maintaining revenue).
 
-### 5. C-Suite Executive Intelligence Hub
+### 4. C-Suite Executive Intelligence Hub
 An overview interface designed for executive presentations:
 *   **Operational Scorecards:** Monitor critical indicators including Total Units Sold, Gross Revenue, Blended Margin, and Manufacturing Spend against the baseline.
 *   **Revenue Concentration Risk Analyzer:** Detects structural risks by evaluating dependency on individual product lines, flagging high concentration when a single product accounts for more than half of the total top-line revenue.
@@ -67,6 +63,36 @@ An overview interface designed for executive presentations:
 *   **Supply Chain Stress-Testing:** Simulates the financial impact of a hypothetical 10% commodity price spike, calculating the exact margin compression and cash erosion.
 
 ![Dashboard Visualizations and Charts](./dashboard_charts_mockup.png)
+
+---
+
+## Advanced Analytical Engines
+
+### 1. Mathematical Goal-Seek and Optimization Core
+The application integrates a custom mathematical engine (`goal_seek_engine.py` and `goal_seek_metrics.py`) built on top of SciPy optimization routines to handle strategic "What-If" business planning:
+*   **Underlying Algorithm:** Employs bounds-constrained numerical solvers (`scipy.optimize.minimize_scalar` and `scipy.optimize.minimize`) to compute optimization coefficients.
+*   **Multi-Point Interpolation:** Analyzes multi-variable dependencies (e.g., how labor rates and material costs compound together) to find convergent paths.
+*   **Bounded Constraints:** Simulates strategies under strict operational boundaries (such as a 50% maximum ceiling on price increases or a 30% floor on sales contraction) to keep mathematical recommendations realistic.
+*   **Flexible Target Mapping:** Resolves exact requirements for multiple corporate target definitions:
+    *   *Revenue Optimization:* Determines necessary volume surges or pricing changes.
+    *   *Margin Expansion:* Identifies cost-minimization profiles or premium margin markups.
+    *   *Operational Profitability (EBIT):* Adjusts SG&A overhead rates, assembly efficiency metrics, and raw labor inputs.
+
+### 2. Natural Language Query (NLQ) Core
+A semantic-oriented drop-down parser designed to make data querying accessible without requiring SQL knowledge:
+*   **Calculation Engine:** Aggregates and calculates complex multi-segment operations (e.g., blended margins or ending inventory value) across selective regional ranges.
+*   **Cross-Dimensional Comparators:** Builds side-by-side comparative matrices splitting performance figures along Products, Countries, or Months.
+*   **Interactive Scenario Benchmarking:** Compares custom runs head-to-head against the Base Case, instantly returning graphical and tabular variance reports.
+*   **Rank and Leaderboard Engine:** Evaluates product and territorial performance, outputting dynamic leaderboards.
+*   **Responsive Custom Renderers:** Uses styled HTML blocks to construct high-contrast visual leaderboards:
+    *   Highlights the top 3 items with custom gold, silver, and bronze ranking indicators.
+    *   Calculates and renders absolute gaps and percentage growth differentials comparing each rank directly against the level above it.
+
+### 3. State-Vector Scenario Tracker
+A centralized database registry managed within the application state:
+*   Saves complete state vectors (including all sales adjustments, pricing configurations, inventory buffers, and material costs) as named scenarios.
+*   Allows users to reload previous configurations back into active editable tables for continuous adjustments.
+*   Includes a comprehensive multi-scenario auditor that contrasts active variables side-by-side, displaying formatted variance tables comparing absolute margins, spending changes, and operating profits.
 
 ---
 
@@ -114,7 +140,7 @@ Ensure you have Python 3.8 or higher installed.
 ### 2. Dependency Installation
 Install the required analytical and visualization libraries using pip:
 ```bash
-pip install streamlit pandas numpy plotly
+pip install streamlit pandas numpy plotly scipy
 ```
 
 ### 3. Application Launch
